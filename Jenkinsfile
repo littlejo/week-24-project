@@ -39,7 +39,7 @@ pipeline {
                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
 
                 sh "terraform plan -input=false -out tfplan "
-                sh 'terraform show -no-color tfplan'
+                sh 'terraform show -no-color tfplan | tee tfplan.txt'
             }
         }
         stage('Approval') {
